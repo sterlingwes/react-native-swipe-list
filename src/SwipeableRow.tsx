@@ -4,8 +4,14 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 type Props<ItemT> = {
   info: ItemT;
-  renderLeftActions?: (info: any) => React.ReactNode;
-  renderRightActions?: (info: any) => React.ReactNode;
+  renderLeftActions?: (
+    info: any,
+    { close }: { close: () => void },
+  ) => React.ReactNode;
+  renderRightActions?: (
+    info: any,
+    { close }: { close: () => void },
+  ) => React.ReactNode;
   isScrolling: boolean;
   closeOnScroll: boolean;
   children?: React.ReactElement | null;
@@ -36,10 +42,10 @@ export const SwipeableRow = <ItemT extends {}>({
   return (
     <Swipeable
       renderLeftActions={() => {
-        return renderLeftActions && renderLeftActions(info);
+        return renderLeftActions && renderLeftActions(info, { close });
       }}
       renderRightActions={() => {
-        return renderRightActions && renderRightActions(info);
+        return renderRightActions && renderRightActions(info, { close });
       }}
       leftThreshold={40}
       rightThreshold={40}
