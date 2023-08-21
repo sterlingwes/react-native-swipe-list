@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Ref, useRef, useState } from 'react';
 import {
   FlatList,
   FlatListProps,
@@ -15,11 +15,10 @@ type SwipableListProps<ItemT> = {
   closeOnScroll?: boolean;
 };
 
-type Props<ItemT> = SwipableListProps<ItemT> & FlatListProps<ItemT>;
+type Props<ItemT> = SwipableListProps<ItemT> &
+  FlatListProps<ItemT> & { flatListRef?: Ref<FlatList<ItemT>> };
 
 export const SwipeableFlatList = <ItemT extends {}>(props: Props<ItemT>) => {
-  const _flatListRef = useRef<FlatList<ItemT>>();
-
   const [isScrolling, setScrolling] = useState(false);
 
   const _onScrollBeginDrag = (
@@ -66,11 +65,7 @@ export const SwipeableFlatList = <ItemT extends {}>(props: Props<ItemT>) => {
   return (
     <FlatList
       {...props}
-      ref={ref => {
-        if (ref !== null) {
-          _flatListRef.current = ref;
-        }
-      }}
+      ref={props.flatListRef}
       onScrollBeginDrag={_onScrollBeginDrag}
       onScrollEndDrag={_onScrollEndDrag}
       renderItem={_renderItem}
