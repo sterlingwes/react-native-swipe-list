@@ -1,4 +1,4 @@
-import React, { Ref, useRef, useState } from 'react';
+import React, { Ref, useState } from 'react';
 import {
   FlatList,
   FlatListProps,
@@ -10,8 +10,14 @@ import { SwipeableRow } from './SwipeableRow';
 
 type SwipableListProps<ItemT> = {
   // Callback method to render the view that will be unveiled on swipe
-  renderLeftActions?: (info: ListRenderItemInfo<ItemT>) => React.ReactNode;
-  renderRightActions?: (info: ListRenderItemInfo<ItemT>) => React.ReactNode;
+  renderLeftActions?: (
+    info: ListRenderItemInfo<ItemT>,
+    options: { close: () => void },
+  ) => React.ReactNode;
+  renderRightActions?: (
+    info: ListRenderItemInfo<ItemT>,
+    options: { close: () => void },
+  ) => React.ReactNode;
   closeOnScroll?: boolean;
 };
 

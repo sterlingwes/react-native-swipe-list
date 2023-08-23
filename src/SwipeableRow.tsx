@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import { View } from 'react-native';
+import { ListRenderItemInfo, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 type Props<ItemT> = {
-  info: ItemT;
+  info: ListRenderItemInfo<ItemT>;
   renderLeftActions?: (
-    info: any,
+    info: ListRenderItemInfo<ItemT>,
     { close }: { close: () => void },
   ) => React.ReactNode;
   renderRightActions?: (
-    info: any,
+    info: ListRenderItemInfo<ItemT>,
     { close }: { close: () => void },
   ) => React.ReactNode;
   isScrolling: boolean;
